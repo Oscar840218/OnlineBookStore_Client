@@ -1,0 +1,165 @@
+<div class="container">
+<h2 class="page-header">Register Form</h2>
+<br>
+<div class="row show-hide-message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<form [formGroup]="form" (submit)="onRegisterSubmit()">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="firstName">FirstName</label>
+        <div [ngClass]="{'has-error': (form.controls.firstName.errors && form.controls.firstName.dirty) || (!usernameValid && form.controls.firstName.dirty), 
+                     'has-success': !form.controls.firstName.errors && usernameValid}">
+        <input type="text" class="form-control" name="firstName" formControlName="firstName">
+        <!-- Validation -->
+        <ul class="help-block">
+          <li *ngIf="form.controls.firstName.errors?.required && form.controls.firstName.dirty">This field is required</li>
+          <li *ngIf="form.controls.firstName.errors?.minlength && form.controls.firstName.dirty || form.controls.firstName.errors?.maxlength && form.controls.firstName.dirty ">Minimum characters: 3, Maximum characters: 15</li>
+          <li *ngIf="form.controls.firstName.errors?.validateUsername && form.controls.firstName.dirty">Username must not have any special characters</li>
+        </ul>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="lastName">LastName</label>
+        <div [ngClass]="{'has-error': (form.controls.lastName.errors && form.controls.lastName.dirty) || (!usernameValid && form.controls.lastName.dirty), 
+        'has-success': !form.controls.lastName.errors && usernameValid}">
+          <input type="text" class="form-control" name="lastName" formControlName="lastName">
+          <ul class="help-block">
+            <li *ngIf="form.controls.lastName.errors?.required && form.controls.lastName.dirty">This field is required</li>
+            <li *ngIf="form.controls.lastName.errors?.minlength && form.controls.lastName.dirty || form.controls.lastName.errors?.maxlength && form.controls.lastName.dirty ">Minimum characters: 3, Maximum characters: 15</li>
+            <li *ngIf="form.controls.lastName.errors?.validateUsername && form.controls.lastName.dirty">Username must not have any special characters</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="gender">Gender</label>
+        <select name="gender" class="form-control" formControlName="gender" required>
+          <option value="male" selected>Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-10">
+          <div [ngClass]="{'has-error': (form.controls.email.errors && form.controls.email.dirty) || (!emailValid && form.controls.email.dirty), 
+          'has-success': !form.controls.email.errors && emailValid}">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" formControlName="email">
+        <ul class="help-block">
+            <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">This field is required</li>
+            <li *ngIf="(form.controls.email.errors?.minlength && form.controls.email.dirty || form.controls.email.errors?.maxlength && form.controls.email.dirty ) && form.controls.email.dirty">Minimum characters: 5, Maximum characters: 30</li>
+            <li *ngIf="form.controls.email.errors?.email && form.controls.email.dirty">This must be a valid e-mail</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="password">Password</label>
+        <div [ngClass]="{'has-error': (form.controls.password.errors && form.controls.password.dirty), 
+                     'has-success': !form.controls.password.errors}">
+        <input type="password" class="form-control" name="password" formControlName="password">
+        <ul class="help-block">
+            <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">This field is required</li>
+            <li *ngIf="form.controls.password.errors?.minlength && form.controls.password.dirty || form.controls.password.errors?.maxlength && form.controls.password.dirty ">Minimum characters: 8, Maximum characters: 35</li>
+            <li *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">Password must not contain specail characters</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="confirm">Confirm Password</label>
+        <div [ngClass]="{'has-error': (form.controls.confirm.errors && form.controls.confirm.dirty) || (form.errors?.matchingPasswords && form.controls.confirm.dirty), 
+                     'has-success': !form.controls.confirm.errors && !form.errors?.matchingPasswords}">
+        <input type="password" class="form-control" name="confirm" formControlName="confirm">
+        <ul class="help-block">
+            <li *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">This field is required</li>
+            <li *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty">Password do not match</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+          <label for="hint">Password Hint</label>
+          <div [ngClass]="{'has-error': (form.controls.hint.errors && form.controls.hint.dirty), 
+                     'has-success': !form.controls.hint.errors}">
+          <input type="text" class="form-control" name="hint" formControlName="hint">
+            <ul class="help-block">
+                <li *ngIf="form.controls.hint.errors?.required && form.controls.hint.dirty">This field is required</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="address">Address</label>
+        <div [ngClass]="{'has-error': (form.controls.address.errors && form.controls.address.dirty) || (!usernameValid && form.controls.address.dirty), 
+        'has-success': !form.controls.address.errors && usernameValid}">
+        <input type="text" class="form-control" name="address" formControlName="address">
+        <ul class="help-block">
+            <li *ngIf="form.controls.address.errors?.required && form.controls.address.dirty">This field is required</li>
+            <li *ngIf="form.controls.address.errors?.minlength && form.controls.address.dirty || form.controls.address.errors?.maxlength && form.controls.address.dirty ">Minimum characters: 10, Maximum characters: 50</li>
+            <li *ngIf="form.controls.address.errors?.validateUsername && form.controls.address.dirty">Address must not have any special characters</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="city">City</label>
+        <select name="city" class="form-control" formControlName="city" required>
+          <option selected value="Taipei">Taipei</option>
+          <option value="Taichung">Taichung</option>
+          <option value="Kaohsiung">Kaohsiung</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="zip">Zip</label>
+        <div [ngClass]="{'has-error': (form.controls.zip.errors && form.controls.zip.dirty) || (!validateNumber && form.controls.zip.dirty), 
+        'has-success': !form.controls.zip.errors && validateNumber}">
+          <input type="text" class="form-control" name="zip" formControlName="zip">
+          <ul class="help-block">
+              <li *ngIf="form.controls.zip.errors?.required && form.controls.zip.dirty">This field is required</li>
+              <li *ngIf="form.controls.zip.errors?.minlength && form.controls.zip.dirty || form.controls.zip.errors?.maxlength && form.controls.zip.dirty ">Minimum characters: 5, Maximum characters: 8</li>
+              <li *ngIf="form.controls.zip.errors?.validateNumber && form.controls.zip.dirty">Must be digits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="age">Age</label>
+        <select name="age" class="form-control" formControlName="age" required>
+          <option selected value="less18"><18</option>
+          <option value="18~24">18~24</option>
+          <option value="25~30">25~30</option>
+          <option value="30~40">30~40</option>
+          <option value="40~50">40~50</option>
+          <option value=">50">>50</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="loveBookType">LoveBookType</label>
+        <select name="loveBookType" class="form-control" formControlName="loveBookType" required>
+          <option selected value="classic">classic</option>
+          <option value="detective">detective</option>
+          <option value="horror">horror</option>
+          <option value="romance">romance</option>
+          <option value="adventure">adventure</option>
+          <option value="fantasy">fantasy</option>
+          <option value="historic">historic</option>
+          <option value="sci-fi">sci-fi</option>
+          <option value="magazine">magazine</option>
+          <option value="text-book">text-book</option>
+          <option value="reference book">reference book</option>
+          <option value="comic book">comic book</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="hobby">Hobby</label>
+        <input type="text" class="form-control" name="hobby" formControlName="hobby">
+      </div>
+    </div>
+    <br>
+    <button [disabled]="!form.valid || processing" type="submit" class="btn btn-primary">Sign up</button>
+</form>
+</div>
+

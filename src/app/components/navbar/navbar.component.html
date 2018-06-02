@@ -1,0 +1,14 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow" id="navbar">
+    <h5 class="my-0 mr-md-auto font-weight-normal navbrand">Online Shared BookStore</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+      <a class="p-2 text-dark" routerLink="/">Features</a>
+      <a class="p-2 text-dark" routerLink="/bookshell">Start</a>
+      <a *ngIf="customerService.loggedIn()" class="p-2 text-dark" routerLink="/profile">Profile</a>
+      <a *ngIf="!customerService.loggedIn()" class="p-2 text-dark" routerLink="/login">Login</a>
+      <a *ngIf="customerService.loggedIn()" class="p-2 text-dark" href="#" (click)="onLogOut()">LogOut</a>
+      <a class="p-2 text-dark" href="#">Support</a>
+      <a class="p-2 text-dark" href="#">Pricing</a>
+    </nav>
+    <a *ngIf="!customerService.loggedIn()" class="btn btn-outline-primary" routerLink="/register-user">Sign up</a>
+    
+</div>
